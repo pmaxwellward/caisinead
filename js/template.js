@@ -1,52 +1,83 @@
-// Load 3D Scene
-var scene = new THREE.Scene(); 
-
-// Load Camera Perspektive
-var camera = new THREE.PerspectiveCamera( 25, window.innerWidth / window.innerHeight, 1, 20000 );
-camera.position.set( 1, 1, 2000 );
-   
-// Load a Renderer
-var renderer = new THREE.WebGLRenderer({ alpha: false });
-renderer.setClearColor( 0xC5C5C3 );
-renderer.setPixelRatio( window.devicePixelRatio );
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-   
-// Load the Orbitcontroller
-var controls = new THREE.OrbitControls( camera, renderer.domElement ); 
-           
-// Load Light
-var ambientLight = new THREE.AmbientLight( 0xcccccc );
-scene.add( ambientLight );
-           
-var directionalLight = new THREE.DirectionalLight( 0xffffff );
-directionalLight.position.set( 0, 1, 1 ).normalize();
-scene.add( directionalLight );				
-
-// glTf 2.0 Loader
-var loader = new THREE.GLTFLoader();				
-   loader.load( "gltf/maxtest2.glb", function ( gltf ) {            
-   var object = gltf.scene;				
-   gltf.scene.scale.set( 2, 2, 2 );			   
-   gltf.scene.position.x = 0;				    //Position (x = right+ left-) 
-   gltf.scene.position.y = 0;				    //Position (y = up+, down-)
-   gltf.scene.position.z = 0;				    //Position (z = front +, back-)
-   
-   scene.add( gltf.scene );
-   }, undefined, function ( error ) {
-
-console.error( error );
-
-} ); 
-
-function animate() {
-   render();
-   requestAnimationFrame( animate );
-   }
-
-function render() {
-   renderer.render( scene, camera );
-   }
-
-render();
+if ( WEBGL.isWebGLAvailable() === false ) {
+   document.body.appendChild( WEBGL.getWebGLErrorMessage() );
+}
+var container, camera, scene, renderer, effect;
+var spheres = [];
+var mouseX = 0;
+var mouseY = 0;
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
+document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+init();
 animate();
+function init() {
+   container = document.createElement( 'div' );
+   document.body.appendChild( container );
+   camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.01, 100 );
+   camera.position.z = 3;
+   camera.focalLength = 3;
+   //var path = "textures/cube/pisa/";
+   //var format = '.png';
+   //var urls = [
+   //   path + 'px' + format, path + 'nx' + format,
+   //   path + 'py' + format, path + 'ny' + format,
+   //   path + 'pz' + format, path + 'nz' + format
+   //];
+   //var textureCube = new THREE.CubeTextureLoader().load( urls );
+   scene = new THREE.Scene();
+   //scene.background = textureCube;
+   //var loader = new THREE.GLTFLoader(); 
+   var geometry = new THREE.SphereBufferGeometry( 0.1, 32, 16 );
+   var material = new THREE.MeshBasicMaterial( { color: 0xffffff/*, envMap: textureCube*/ } );
+   for ( var i = 0; i < 500; i ++ ) {
+      var mesh = new THREE.Mesh( geometry, material );
+      mesh.position.x = Math.random() * 10 - 5;
+      mesh.position.y = Math.random() * 10 - 5;
+      mesh.position.z = Math.random() * 10 - 5;
+      mesh.scale.x = mesh.scale.y = mesh.scale.z = Math.random() * 3 + 1;
+      scene.add( mesh );
+      spheres.push( mesh );
+   }
+   //
+   renderer = new THREE.WebGLRenderer();
+   renderer.setPixelRatio( window.devicePixelRatio );
+   container.appendChild( renderer.domElement );
+   var width = window.innerWidth || 2;
+   var height = window.innerHeight || 2;
+   effect = new THREE.ParallaxBarrierEffect( renderer );
+   effect.setSize( width, height );
+   //
+   window.addEventListener( 'resize', onWindowResize, false );
+}
+function loadObj (gltf) {
+   mesh = gltf.scene;
+}
+function onWindowResize() {
+   windowHalfX = window.innerWidth / 2;
+   windowHalfY = window.innerHeight / 2;
+   camera.aspect = window.innerWidth / window.innerHeight;
+   camera.updateProjectionMatrix();
+   effect.setSize( window.innerWidth, window.innerHeight );
+}
+function onDocumentMouseMove( event ) {
+   mouseX = ( event.clientX - windowHalfX ) / 100;
+   mouseY = ( event.clientY - windowHalfY ) / 100;
+}
+//
+function animate() {
+   requestAnimationFrame( animate );
+   render();
+}
+function render() {
+   var timer = 0.0001 * Date.now();
+   camera.position.x += ( mouseX - camera.position.x ) * .05;
+   camera.position.y += ( - mouseY - camera.position.y ) * .05;
+   camera.lookAt( scene.position );
+   for ( var i = 0, il = spheres.length; i < il; i ++ ) {
+      var sphere = spheres[ i ];
+      sphere.position.x = 5 * Math.cos( timer + i );
+      sphere.position.y = 5 * Math.sin( timer + i * 1.1 );
+   }
+   effect.render( scene, camera );
+}
+
