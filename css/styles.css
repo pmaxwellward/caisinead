@@ -6,7 +6,6 @@ html, body {
     height: 100%;
     margin: 0px;
     padding: 0px;
-<<<<<<< HEAD
 }
 body {
     opacity: 1;
@@ -15,15 +14,10 @@ body {
 body.fade-out {
     opacity: 0;
     transition: none;   
-=======
-    overflow-x: hidden;
-    overflow: hidden; 
->>>>>>> 57b3707c2b4c5bc983179e21cd14265c30a86c70
 }
 canvas {
     width: 50%;
     height: 25vh;
-<<<<<<< HEAD
     overflow-x: hidden;
     overflow: hidden; 
 }
@@ -152,28 +146,6 @@ canvas {
         width: 100vw;
         top: 40px;
     }
-=======
-}
-.menu-bar {
-    background-color: white;
-    overflow: hidden;
-    position: fixed;
-    width: 101vw;
-    margin-left: -8px;
-    display: flex;
-    height: 13vh;
-    align-items: center;
-}
-.menu-bar a {
-    float: left;
-    font-family: 'Poppins';
-    font-weight: 300;
-    color: black;
-    text-align: center;
-    margin: 0 2.5vw;
-    text-decoration: none;
-    font-size: 1.5em;
->>>>>>> 57b3707c2b4c5bc983179e21cd14265c30a86c70
 }
 .underline {
     display: inline;
@@ -196,7 +168,6 @@ canvas {
   .underline:focus:after,
   .underline:active:after {
     right: 0;
-<<<<<<< HEAD
   }   
 /*.body-bar {
     displaY: block;
@@ -224,8 +195,5 @@ canvas {
     position: absolute;
     z-index: 0;
     width: 100vw;
-    top: 40px;
+    top: 10vh;
 }
-=======
-  }
->>>>>>> 57b3707c2b4c5bc983179e21cd14265c30a86c70
