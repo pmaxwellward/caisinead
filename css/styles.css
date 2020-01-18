@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400&display=swap');
+
+html, body {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    opacity: 1;
+    transition: 1.5s opacity;
+}
+body.fade-out {
+    opacity: 0;
+    transition: none;   
+}
+canvas {
+    width: 50%;
+    height: 25vh;
+    overflow-x: hidden;
+    overflow: hidden; 
+}
+@media only screen and (min-width: 500px) {
+    .menu-bar {
+        background:rgba(255,255,255,0.9);
+        overflow: hidden;
+        position: fixed;
+        width: 101vw;
+        margin-left: -8px;
+        display: flex;
+        height: 13vh;
+        align-items: center;
+        z-index: 10;
+    }
+    .menu-bar a {
+        float: left;
+        font-family: 'Poppins';
+        font-weight: 300;
+        color: black;
+        text-align: center;
+        margin: 0 2.5vw;
+        text-decoration: none;
+        font-size: 1.5em;
+    }
+    .card {
+        background-color:rgba(255,255,255,0.9);
+        overflow: hidden;
+        float: left;
+        padding: 0 1.7rem;
+        width: 40%;
+        margin-top:21vh;
+        margin-left:8vh;
+        position: absolute;
+        font-family: 'Poppins';
+        font-weight: 300;
+        font-size: 1em;
+        color: black;
+        text-align: center; 
+        z-index: 1;  
+    }
+
+    .gallery {
+        margin: auto;
+        max-width: 1290px;
+        padding-top: 13vh;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .gallery video,img {
+        /*transition: 1s;*/
+        padding: 15px;
+        width:25vw;
+        max-width:400px;
+        height: auto;
+        margin:auto;
+    }
+    .container video {
+        position: absolute;
+        z-index: 0;
+        width: 100vw;
+    } 
+}
+@media only screen and (max-width: 499px) {
+    .menu-bar {
+        background:rgba(255,255,255,0.9);
+        overflow: hidden;
+        position: fixed;
+        width: 105vw;
+        margin-left: -8px;
+        display: flex;
+        height: 13vh;
+        align-items: center;
+        z-index: 10;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .menu-bar a {
+        float: left;
+        font-family: 'Poppins';
+        font-weight: 300;
+        color: black;
+        text-align: center;
+        margin: 0 2.5vw;
+        text-decoration: none;
+        font-size: 1em;
+    }
+    .card {
+        background-color: rgba(255,255,255,0.9);
+        position: absolute;
+        display: flex;
+        transform-origin: center;
+        left: 5vw;
+        top: 17vh;
+        width: 90vw;
+        font-family: 'Poppins';
+        font-weight: 300;
+        font-size: .65em;
+        color: black;
+        text-align: center;
+        z-index: 1;
+    }
+    .gallery {
+        margin: auto;
+        max-width: 1290px;
+        padding-top: 13vh;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .gallery video,img {
+        /* transition: 1s; */
+        padding: 15px;
+        width: 85vw;
+        max-width: 400px;
+        height: auto;
+        margin: auto;
+    }
+    .container video {
+        position: absolute;
+        z-index: 0;
+        width: 100vw;
+        top: 40px;
+    }
+}
+.underline {
+    display: inline;
+    position: relative;
+  }
+  .underline:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 100%;
+    bottom: -5px;
+    background: #000;
+    height: 4px;
+    transition-property: left right;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+  }
+  .underline:hover:after,
+  .underline:focus:after,
+  .underline:active:after {
+    right: 0;
+  }   
+/*.body-bar {
+    displaY: block;
+    float: center;
+    width: 33.33%;
+    text-align: center;
+    color: yellow;
+    font-family: 'Calibri';
+}
+.body-bar a {
+    float: left;
+    font-family: 'Poppins';
+    font-weight: 300;
+    color: black;
+    text-align: center;
+    margin: 0 2.5vw;
+    text-decoration: none;
+    font-size: 1.5em;*/
+.card a {
+    
+    text-decoration:none;
+    color: black;
+}
+.container video {
+    position: absolute;
+    z-index: 0;
+    width: 100vw;
+    top: 40px;
+}
